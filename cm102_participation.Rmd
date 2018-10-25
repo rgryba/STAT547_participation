@@ -70,7 +70,7 @@ Demo: we can substitute, too. Replace the word "fox" with "giraffe" using `str_r
 
 ```{r}
 fox %>% 
-    str_replace(FILL_THIS_IN)
+    str_replace("fox",replacement = "giraffe")
 ```
 
 Know the position you want to extract/replace? Try `str_sub()`.
@@ -91,8 +91,8 @@ str_length(fruit)
 length(fruit)
 ```
 
-
 `str_c()` for concatenating strings. Check the docs for an excellent explanation using a matrix.
+note: will repeat shorter vectors - line 100
 
 ```{r}
 str_c(words[1:4], words[5:8], sep=" & ")
@@ -125,21 +125,21 @@ Let's make those folders!
 1. Make a character vector with entries `"01"`, `"02"`, ..., `12` with `str_pad()`.
 
 ```{r}
-(num <- str_pad(FILL_THIS_IN))
+(num <- str_pad(1:12, width=2, side="left", pad="0"))
 ```
 
-2. Use `str_c()` to combine `"cm1"` with the numbers:
+2. Use `str_c()` to combine `"/cm1"` with the numbers:
     - If your system uses "\" instead of "/", you might need two backslashes.
 
 ```{r}
-(folders <- str_c(FILL_THIS_IN))
+(folders <- str_c("/cm1", num))
 ```
 
-3. Use `testthat` to check that each entry of `folders` has 5 characters. You might find the base R `all()` function useful.
+3. Use `testthat` to check that each entry of `folders` has 6 characters. You might find the base R `all()` function useful.
 
 ```{r}
 test_that("folder names are length 5.", {
-    expect_FILL_THIS_IN()
+    expect_true(all(str_length(folders) == 6))
 })
 ```
 
@@ -147,6 +147,10 @@ test_that("folder names are length 5.", {
     - Note: `dir.create()` requires the full path to be specified. You might find the `here::here()` function useful.
     - This code might work (depending on your directory): `for (folder in folders) dir.create(here::here(folder))`
     - We'll learn how to use `purrr` instead of loops next week.
+    
+```{r}
+dir.create(here::here(folders))
+```
 
 ### Make README's
 
@@ -155,14 +159,15 @@ Now, let's seed the folders with README's.
 1. Add `/README.md` to the end of the folder names stored in `folders`:
 
 ```{r}
-files <- FILL_THIS_IN
+(files <- str_c(folders, "/README.md"))
 ```
 
 2. Make a vector of contents to put in each README. Put a title and body. 
     - Hint: Use `\n` to indicate a new line! This works in graphs, too.
     
 ```{r}
-contents <- FILL_THIS_IN
+(contents <- str_c("# Participation\n\n Participation for class meeting ", 1:12))
+cat(contents[1])
 ```
 
 3. BONUS: Write the README's to file using base R's `write(x, file)`:
@@ -209,8 +214,8 @@ str_view_all(countries, pattern = "i.a", match=TRUE)
 Exercise: Canada isn't the only country with three interspersed "a"'s. Find the others. Try both `str_view_all()` and `str_subset()`.
 
 ```{r}
-str_view_all(FILL_THIS_IN)
-str_subset(FILL_THIS_IN)
+str_view_all(countries, pattern="a.a.a", match=TRUE)
+str_subset(countries, pattern="a.a.a")
 ```
 
 
@@ -251,7 +256,7 @@ Note that not all special characters "work" within `[]`, but some do, and do not
 Exercise: Find all countries with three non-vowels next to each other.
 
 ```{r}
-str_view_all_match(countries, pattern = "YOUR_REGEX_HERE")
+str_view_all_match(countries, pattern = "[^aeiou][^aeiou][^aeiou]")
 ```
 
 
@@ -282,7 +287,7 @@ See list at https://r4ds.had.co.nz/strings.html#repetition
 Find all countries that have any number of o's (but at least 1) following r:
 
 ```{r}
-str_view_all_match(countries, "re+")
+str_view_all_match(countries, "ro+")
 ```
 
 
@@ -296,7 +301,7 @@ str_view_all_match(countries, "e{2}")
 Exercise: Find all countries that have either "a" or "e", twice in a row (with a changeover allowed, such as "ae" or "ea"):
 
 ```{r}
-str_view_all_match(countries, pattern="YOUR_REGEX_HERE")
+str_view_all_match(countries, pattern="e{2}|a{2}|ae|ea")
 ```
 
 
