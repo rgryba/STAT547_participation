@@ -302,6 +302,8 @@ Exercise: Find all countries that have either "a" or "e", twice in a row (with a
 
 ```{r}
 str_view_all_match(countries, pattern="e{2}|a{2}|ae|ea")
+str_view_all_match(countries, pattern="(a|e)(a|e)")
+str_view_all_match(countries, pattern="(a|e){2}")
 ```
 
 
@@ -343,6 +345,7 @@ Note that the parentheses are first resolved, THEN referred to. NOT re-executed.
 ```{r}
 str_view_all(c("bananas"), "(.)(.)\\1\\2.*\\1\\2")
 ```
+'b' not highlighted because 'ba' is never followed again by another 'ba'; moves to 'an'
 
 We can refer to them later in the search, too:
 
@@ -363,7 +366,8 @@ Convert `words` to pig latin, which involves:
     - Use `str_c()`.
     
 ```{r}
-YOUR_CODE_HERE
+head(words)
+
 ```
 
 Find all countries that end in "y"
