@@ -2,8 +2,7 @@
 title: "STAT 547 Class Meeting 02 Worksheet"
 author: "Rowenna Gryba"
 date: "2018-10-25"
-output: github_document
-always_allow_html: yes
+output: html_notebook
 editor_options: 
   chunk_output_type: inline
 ---
