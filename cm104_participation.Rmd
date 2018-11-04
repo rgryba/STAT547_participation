@@ -253,7 +253,8 @@ iris_lm <- iris_nested %>%
 iris_lm$fit[[1]]
 
 iris_lm %>%
-  tidy(fit)
+  mutate(output = map(fit, broom::tidy)) %>%
+  unnest(output)
 ```
 
 # Application: Time remaining?
