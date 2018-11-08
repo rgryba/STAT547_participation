@@ -1,0 +1,5 @@
+To get the power repo (which imbeded in our participation repo):
+1. open a new session in your participation .rproj
+2. select the power folder contents and commit/push
+
+This should now 'un-nest' the repos
