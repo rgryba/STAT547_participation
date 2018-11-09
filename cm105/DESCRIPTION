@@ -2,10 +2,18 @@ Package: powers
 Type: Package
 Title: Apply powers to your vectors
 Version: 0.1.0
-Authors@R: person("Rowenna", "Gryba", email = "r.gryba@stat.ubc.ca")
+Authors@R: person("Rowenna", "Gryba", email = "r.gryba@stat.ubc.ca",
+  role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENCE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    ggplot2
