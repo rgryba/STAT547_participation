@@ -1,0 +1,11 @@
+Package: powers
+Type: Package
+Title: Apply powers to your vectors
+Version: 0.1.0
+Authors@R: person("Rowenna", "Gryba", email = "r.gryba@stat.ubc.ca")
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENCE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
