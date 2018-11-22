@@ -1,0 +1,38 @@
+# Notes:
+
+## Running code:
+
+----| Terminal | Within R
+----|---|
+R script | R script ____ | source("----")
+Rmd | R script -e line of R code   | rmarkdown::render("---")
+
+
+## Make file rules for file A, B is list of dependencies, C are the instructions of how to use B to make A (code that goes in the terminal - not R code); can have multiple lines after C as long as use tab
+
+A : B
+tab C
+
+## Running make:
+can just put 'make'
+or can specify a target 'make A'
+or 'make all' 
+or 'make clean'
+
+# Why use this?
+Use when have a lot of code and when it's get hard to manage. 
+make lets you break it down into smaller tasks (similar to functions but to overall analysis).
+as you keep adding changes, it allows you to rerun your code by only typing make rather than figuring out where in your code you need to start the run
+
+what we are working through today is small and you wouldn't necc run these using make but good for an example
+
+Package for when you have things you do over and over again make file for when you want to rerun analysis
+
+Two ways to automate pipeline:
+make file - spots changes and where it needs to be rerun
+source() - problem is that you need to rerun analysis from top to bottom rather than chunks
+
+Short cuts:
+$@ is short hand for the target
+$< reference the first 'thing' in the line
+
