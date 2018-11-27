@@ -120,21 +120,24 @@ We can extract other things besides the text between the tags:
 
 ```{r}
 simple_page %>% 
-	html_nodes("*")
+	html_nodes("*") %>%
+  html_name()
 ```
 
 - `html_attrs()` gives all attributes of the tags. Try it with `html_nodes("a")`:
 
 ```{r}
 simple_page %>% 
-	html_nodes("a")
+	html_nodes("a") %>%
+  html_attrs()
 ```
 
 - `html_attr()` (not plural) extracts a vector of the attribute contents by the `name` argument. Try `name="href"` with `html_nodes("a")`:
 
 ```{r}
 simple_page %>% 
-	html_nodes("a")
+	html_nodes("a") %>%
+  html_attr(name="href")
 ```
 
 
@@ -157,7 +160,10 @@ Viewing the source to find the CSS is horrendous. In comes [`SelectorGadget`](ht
 2. Put the CSS selection in the `html_nodes()`.
 
 ```{r}
-
+read_html("https://www.musixmatch.com/search/kane%20brown") %>%
+  html_nodes(".track-card .media-card-title") %>%
+  html_text()
+  
 ```
 
 ## Reading a table
@@ -166,7 +172,8 @@ Goal: extract the Wikipedia table of the [tallest steel roller coasters](https:/
 
 ```{r}
 read_html("https://en.wikipedia.org/wiki/List_of_roller_coaster_rankings") %>% 
-	FILL_THIS_IN
+	html_table(fill = TRUE) %>%
+  .[[2]]
 ```
 
 
@@ -177,10 +184,10 @@ We've already seen `readr`, but what about importing other data types?
 - JSON, with the `jsonlite` package. Examples from the `fromJSON()` documentation:
 
 ```{r}
-fromJSON('{"city" : "Z\\u00FCrich"}') # A list
-fromJSON("https://api.github.com/users/hadley/orgs") %>% 
+jsonlite::fromJSON('{"city" : "Z\\u00FCrich"}') # A list
+jsonlite::fromJSON("https://api.github.com/users/hadley/orgs") %>% 
 	glimpse() # A data frame
-toJSON(mtcars, pretty=TRUE)
+jsonlite::toJSON(mtcars, pretty=TRUE)
 ```
 
 
