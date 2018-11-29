@@ -224,12 +224,17 @@ __Together__:
 2. Inspect its `str()`ucture, `class()`, and `names()`.
 
 ```{r}
-site <- GET("PUT_URL_HERE")
+site <- GET("www.neopets.com")
+str(site)
+names(site)
+class(site)
 ```
 
 3. What's the `$status_code`? How about the `$content`?
 
 ```{r}
+site$status_code
+#site$content #not useful - specific to httr package - storing raw content in bites
 
 ```
 
@@ -238,8 +243,10 @@ site <- GET("PUT_URL_HERE")
 	- Try again from the top, this time with Hadley's GitHub Orgs: `https://api.github.com/users/hadley/orgs`
 
 ```{r}
+site <- GET("https://api.github.com/users/hadley/orgs")
+names(site)
 status_code(site)
-content(site)
+content(site) #gives a list this time because github has an api
 ```
 
 5. The GitHub API (Hadley's GitHub Orgs) returns JSON. Why not just use `jsonlite::fromJSON()`?
